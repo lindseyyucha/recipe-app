@@ -105,20 +105,27 @@ const RecipeSearch = () => {
         ))}
       </Row>
       <Row className="mt-4">
-        <Col>
+        <Col className="text-center">
           <h2>Saved Recipes</h2>
-          <ul>
-            {savedRecipes.map((savedRecipe) => (
-              <li key={savedRecipe.id}>
-                <h3>{savedRecipe.label}</h3>
-                <img src={savedRecipe.image} alt={savedRecipe.label} />
-                <a href={savedRecipe.url} target="_blank" rel="noopener noreferrer">View Recipe</a>
-              </li>
-            ))}
-          </ul>
         </Col>
+      </Row>
+      <Row className="mt-2 justify-content-center">
+        {savedRecipes.map((savedRecipe) => (
+          <Col key={savedRecipe.id} xs={6} sm={4} md={3} lg={2}>
+            <Card className="mb-4">
+              <Card.Img variant="top" src={savedRecipe.image} alt={savedRecipe.label} />
+              <Card.Body>
+                <Card.Title>{savedRecipe.label}</Card.Title>
+                <Card.Text>
+                  <a href={savedRecipe.url} target="_blank" rel="noopener noreferrer">View Recipe</a>
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
       </Row>
     </Container>
   );
 };
+
 export default RecipeSearch;
