@@ -3,6 +3,7 @@ import axios from 'axios';
 import { supabase } from './supabase';
 import './style.css';
 
+
 const RecipeSearch = () => {
   const [query, setQuery] = useState('');
   const [recipes, setRecipes] = useState([]);
