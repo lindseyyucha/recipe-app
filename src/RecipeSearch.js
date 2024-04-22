@@ -28,16 +28,7 @@ const RecipeSearch = () => {
       console.error('Error fetching saved recipes:', error.message);
     }
   };
-  const searchRecipes = async () => {
-    try {
-      const response = await axios.get(
-        `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`
-      );
-      setRecipes(response.data.hits);
-    } catch (error) {
-      console.error('Error fetching recipes:', error);
-    }
-  };
+
   const saveRecipe = async (recipe) => {
     try {
       const { data, error } = await supabase
