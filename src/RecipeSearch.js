@@ -68,54 +68,26 @@ const RecipeSearch = () => {
     }
   };
 
+
   return (
-    <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-center py-8">
-      <div className="lg:w-2/3 lg:mr-8 mb-8 lg:mb-0">
-        <form onSubmit={handleSubmit} className="mb-4 flex items-center justify-center lg:justify-start">
-          <input
-            type="text"
-            value={query}
-            onChange={handleChange}
-            placeholder="Search for recipes..."
-            className="w-full lg:w-auto border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500"
-          />
-          <button
-            type="submit"
-            className="bg-blue-500 text-white rounded-md px-4 py-2 ml-2 hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-          >
-            Search
-          </button>
-        </form>
-        <ul>
-          {recipes.map((recipe) => (
-            <li key={recipe.recipe.uri} className="mb-4">
-              <div className="border border-gray-300 rounded-md p-4 flex items-center justify-between">
-                <div>
-                  <h2 className="text-xl font-semibold">{recipe.recipe.label}</h2>
-                  <img src={recipe.recipe.image} alt={recipe.recipe.label} className="mt-2 rounded-md" />
-                </div>
-                <div>
-                  <a
-                    href={recipe.recipe.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-500 hover:underline"
-                  >
-                    View Recipe
-                  </a>
-                  <button
-                    onClick={() => saveRecipe(recipe.recipe)}
-                    className="bg-green-500 text-white rounded-md px-4 py-2 ml-2 hover:bg-green-600 focus:outline-none focus:bg-green-600"
-                  >
-                    Save
-                  </button>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="lg:w-1/3">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-peach text-brown">
+      <h1 className="text-4xl font-bold mt-8 mb-4">Recipe Search</h1>
+      <form onSubmit={handleSubmit} className="mb-8 flex items-center justify-center">
+        <input
+          type="text"
+          value={query}
+          onChange={handleChange}
+          placeholder="Search for recipes..."
+          className="w-64 border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500"
+        />
+        <button
+          type="submit"
+          className="bg-blue-500 text-white rounded-md px-4 py-2 ml-2 hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+        >
+          Search
+        </button>
+      </form>
+      <div className="lg:w-1/4 ml-auto">
         <h2 className="text-xl font-semibold mb-4">Saved Recipes</h2>
         <ul>
           {savedRecipes.map((savedRecipe) => (
@@ -139,4 +111,5 @@ const RecipeSearch = () => {
     </div>
   );
 };
+
 export default RecipeSearch;
