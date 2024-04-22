@@ -3,6 +3,7 @@ import axios from 'axios';
 import { supabase } from './supabase';
 import './style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap'; 
 
 
 const RecipeSearch = () => {
@@ -71,52 +72,53 @@ const RecipeSearch = () => {
 
 
   return (
-    <div className="container">
-      <div className="row justify-content-center">
-        <div className="col-md-6">
-          <form onSubmit={handleSubmit} className="mb-4">
-            <div className="input-group">
-              <input
+    <Container>
+      <Row className="justify-content-center mt-4">
+        <Col xs={12} md={6}>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group>
+              <Form.Control
                 type="text"
                 value={query}
                 onChange={handleChange}
-                className="form-control"
                 placeholder="Search for recipes..."
               />
-              <div className="input-group-append">
-                <button type="submit" className="btn btn-primary">Search</button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-      
-      <div className="row">
+            </Form.Group>
+            <Button variant="primary" type="submit">Search</Button>
+          </Form>
+        </Col>
+      </Row>
+      <Row className="mt-4">
         {recipes.map((recipe) => (
-          <div className="col-md-4 mb-4" key={recipe.recipe.uri}>
-            <div className="card">
-              <img src={recipe.recipe.image} className="card-img-top" alt={recipe.recipe.label} />
-              <div className="card-body">
-                <h5 className="card-title">{recipe.recipe.label}</h5>
-                <a href={recipe.recipe.url} className="btn btn-primary" target="_blank" rel="noopener noreferrer">View Recipe</a>
-                <button onClick={() => saveRecipe(recipe.recipe)} className="btn btn-success ml-2">Save</button>
-              </div>
-            </div>
-          </div>
+          <Col key={recipe.recipe.uri} xs={12} sm={6} md={4} lg={3}>
+            <Card className="mb-4">
+              <Card.Img variant="top" src={recipe.recipe.image} alt={recipe.recipe.label} />
+              <Card.Body>
+                <Card.Title>{recipe.recipe.label}</Card.Title>
+                <Card.Text>
+                  <a href={recipe.recipe.url} target="_blank" rel="noopener noreferrer">View Recipe</a>
+                </Card.Text>
+                <Button variant="primary" onClick={() => saveRecipe(recipe.recipe)}>Save</Button>
+              </Card.Body>
+            </Card>
+          </Col>
         ))}
-      </div>
-
-      <h2 className="mt-5">Saved Recipes</h2>
-      <ul>
-        {savedRecipes.map((savedRecipe) => (
-          <li key={savedRecipe.id}>
-            <h2>{savedRecipe.label}</h2>
-            <img src={savedRecipe.image} alt={savedRecipe.label} />
-            <a href={savedRecipe.url} target="_blank" rel="noopener noreferrer">View Recipe</a>
-          </li>
-        ))}
-      </ul>
-    </div>
+      </Row>
+      <Row className="mt-4">
+        <Col>
+          <h2>Saved Recipes</h2>
+          <ul>
+            {savedRecipes.map((savedRecipe) => (
+              <li key={savedRecipe.id}>
+                <h3>{savedRecipe.label}</h3>
+                <img src={savedRecipe.image} alt={savedRecipe.label} />
+                <a href={savedRecipe.url} target="_blank" rel="noopener noreferrer">View Recipe</a>
+              </li>
+            ))}
+          </ul>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 export default RecipeSearch;
